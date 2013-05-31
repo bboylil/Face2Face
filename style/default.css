@@ -1,0 +1,166 @@
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	background-image: url('../images/background.jpg');
+}
+#banner{
+	position: absolute;
+	height:200px;
+	width: 500px;
+	color: white;
+	margin-top: 200px;
+	margin-left: 100px;
+}
+#formularios{
+	position:absolute;
+	margin-top: 170px;
+	margin-right: 200px;
+	margin-left: 800px;
+}
+.form {
+	background: -moz-linear-gradient(center top , #FFFFFF 0px, #DDDDDD 100%) repeat scroll 0 0 transparent;
+	/*background: -webkit-linear-gradient(center top , #FFFFFF 0px, #DDDDDD 100%) repeat scroll 0 0 transparent;*/
+	background: -webkit-linear-gradient(#FFFFFF, #DDDDDD);
+	width: 300px;
+	height: 135px;
+	padding: 0 5px;
+	color: white;
+	font-size: 16px;
+	position: relative;
+	border-radius: 5px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-left: 15px;
+	padding-right: 15px;
+	margin-top: 10px;
+}
+.form2{
+	background: transparent;
+	background: transparent;
+	width: 300px;
+	height: 100px;
+	color: white;
+	font-size: 16px;
+	position: relative;
+	border-radius: 5px;
+	display: none;
+}
+.button{
+    background-repeat: no-repeat;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 15px;
+    padding: 0px 10px;
+    position: relative;
+	float: right;
+	margin-top: 5px;
+}
+input {
+	height: 30px;
+	width: 100%;
+	margin-top: 5px;
+}
+.form input[type=text]:hover, input[type=password]:hover{
+	border: 2px solid #58ACFA;
+	border-radius: 4px 4px 4px 4px;
+
+}
+
+
+#registro{
+	height: 300px;
+}
+#connect{
+	background: -moz-linear-gradient(#58ACFA, #0080FF);
+	background: -webkit-linear-gradient(#58ACFA, #0080FF);
+	color: white;
+    width: 120px;
+}
+#connect:hover{
+	background: -moz-linear-gradient(#58ACFA, #0040FF);
+	background: -webkit-linear-gradient(#58ACFA, #0040FF);
+	color: white;
+    width: 120px;
+
+}
+
+#olvido{
+	background: -moz-linear-gradient(#FF0000, #DF0101);
+	background: -webkit-linear-gradient(#FF0000, #DF0101);
+	color: white;
+    width: 165px;
+    margin-top:0;
+	
+}
+#olvido:hover{
+	background: -moz-linear-gradient(#DF0101, #8A0808);
+	background: -webkit-linear-gradient(#DF0101, #8A0808);
+	color: white;
+    width: 165px;
+	margin-top:0;
+}
+
+
+#bregistro{
+	background: -moz-linear-gradient(#FACC2E, #FE9A2E);
+	background: -webkit-linear-gradient(#FACC2E, #FE9A2E);
+	color: #3B240B;
+	width: 200px;
+}
+#bregistro:hover{
+	background: -moz-linear-gradient(#FACC2E, #DF7401);
+	background: -webkit-linear-gradient(#FACC2E, #DF7401);
+	color: #3B240B;
+	width: 200px;
+}
+
+#restaurar{
+	background: -moz-linear-gradient(#04B431, #088A08);
+	background: -webkit-linear-gradient(#04B431, #088A08);
+	color: white;
+	width: 100px;
+
+}
+#restaurar:hover{
+	background: -moz-linear-gradient(#088A08, #0B6121);
+	background: -webkit-linear-gradient(#088A08, #0B6121);
+	color: white;
+	width: 100px;
+}
+
+.log{
+	font-style:normal;
+	height: 22px;
+	color: red;
+	font-size: 12px;
+	text-align:center;
+	margin-top: -10px;
+}
+.log2{
+	color: red;
+	margin-top: 50px;
+	text-align: center;
+	font-size: 13px;
+}
+
+
+
+.subtitulo{
+	padding:0;
+	font-size: 12px;
+	color: gray;
+	text-decoration: none;
+}
+.subtitulo2{
+	font-size: 15px;
+	text-align: center;
+	margin-top: 25px;
+	margin-left: 0;
+	padding: 0px 0px;
+	color: gray;
+	text-decoration: none;
+}

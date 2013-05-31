@@ -7,22 +7,6 @@ function UIresize(){
   document.getElementById('videos').style.width = videosWidth;
 }
 
-function getNumPerRow() {
-  var len = videos.length;
-  var biggest;
-
-  // Ensure length is even for better division.
-  if(len % 2 === 1) {
-    len++;
-  }
-
-  biggest = Math.ceil(Math.sqrt(len));
-  while(len % biggest !== 0) {
-    biggest++;
-  }
-  return biggest;
-}
-
 function subdivideVideos() {
   var numVideos = videos.length,
       videosHeight = window.innerHeight,
@@ -62,27 +46,7 @@ function subdivideVideos() {
       video.style.height = videosHeight/3;
     }
   }
-
-  // var perRow = getNumPerRow();
-  // var numInRow = 0;
-  // for(var i = 0, len = videos.length; i < len; i++) {
-  //   var video = videos[i];
-  //   setWH(video, i);
-  //   numInRow = (numInRow + 1) % perRow;
-  // }
 }
-
-// function setWH(video, i) {
-//   var perRow = getNumPerRow();
-//   var perColumn = Math.ceil(videos.length / perRow);
-//   var width = Math.floor((window.innerWidth) / perRow);
-//   var height = Math.floor((window.innerHeight - 190) / perColumn);
-//   video.width = width;
-//   video.height = height;
-//   video.style.position = "absolute";
-//   video.style.left = (i % perRow) * width + "px";
-//   video.style.top = Math.floor(i / perRow) * height + "px";
-// }
 
 function cloneVideo(domId, socketId) {
   var video = document.getElementById(domId);
@@ -145,6 +109,14 @@ function initNewRoom() {
   })
 }
 
+var webSocket = {
+  send: function(message) {
+    rtc._socket.send(message);
+  },
+  recv: function(message) {
+    return message;
+  }
+};
 
 var websocketChat = {
   send: function(message) {
@@ -160,6 +132,7 @@ var dataChannelChat = {
   send: function(message) {
     for(var connection in rtc.dataChannels) {
       var channel = rtc.dataChannels[connection];
+      console.log(channel);
       channel.send(message);
     }
   },
@@ -172,13 +145,13 @@ var dataChannelChat = {
 function initChat() {
   var chat;
 
-  if(rtc.dataChannelSupport) {
-    console.log('initializing data channel chat');
-    chat = dataChannelChat;
-  } else {
+  // if(rtc.dataChannelSupport) {
+  //   console.log('initializing data channel chat');
+  //   chat = dataChannelChat;
+  // } else {
     console.log('initializing websocket chat');
     chat = websocketChat;
-  }
+  // }
 
   var input = document.getElementById("chatinput");
   //var toggleHideShow = document.getElementById("hideShowMessages");
@@ -240,9 +213,42 @@ function init() {
 
 
   var room = window.location.hash.slice(1);
+  var user_id = Math.floor((Math.random()*10)+1);
 
+  // Conexión por webSocket
   rtc.connect("ws:192.168.12.190:8080",room);
   //rtc.connect("ws:" + window.location.href.substring(window.location.protocol.length).split('#')[0], room);
+
+  // Al conectarnos con el websocket, enviamos información del usuario
+  rtc.on('connect', function(data){
+    webSocket.send(JSON.stringify({
+        "eventName": "user_connect",
+        "data": {
+          "user_id": user_id
+        }
+      }));
+  });
+
+  // Listener que recibe actualización de estado de usuarios
+  rtc.on('receive_status', function(data){
+    var text = "";
+    $.each(data.users, function(i, val){
+      if(val != user_id)
+        text += "<li>Usuario "+val+"</li>";
+    });
+    
+    // Insertamos usuarios en DOM
+    $('.users_list').html(text);
+
+    // Añadimos los listeners al clicar en el usuario
+    var lis = $('.users_list li');
+    $.each(lis, function(i, val){
+      $(val).click(function(){
+        
+      });
+    });
+
+  });
 
   rtc.on('add remote stream', function(stream, socketId) {
     console.log("ADDING REMOTE STREAM...");
@@ -251,11 +257,22 @@ function init() {
     rtc.attachStream(stream, clone.id);
     subdivideVideos();
   });
+
+  // Listener: Desconexión del socket
   rtc.on('disconnect stream', function(data) {
     console.log('remove ' + data);
     removeVideo(data);
+
+    // Enviamos información de estado al server
+    webSocket.send(JSON.stringify({
+      "eventName": "user_disconnect",
+      "data": {
+        "socket_id": data
+      }
+    }));
+
   });
-  initFullScreen();
+  //initFullScreen();
   initNewRoom();
   initChat();
 }
