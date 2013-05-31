@@ -2,6 +2,9 @@
 session_start();
 include '../connect/conecta_bd.php';
 include '../connect/functions.php';
+
+if(!$_SESSION['valid_user']) header("Location: /");
+
 ?>
 
 <html>
@@ -44,9 +47,13 @@ include '../connect/functions.php';
 							?>
 						</div>
 						<div class='rooms'>
-							<?php
-							rooms();
-							?>
+							<ul class="sales_list">
+								<?php
+								$salas = rooms();
+								foreach ($salas as $s) { ?>
+									<li><?=$s['nsala']?></li>	
+								<?php } ?>
+							</ul>
 						</div>
 			
 			</div>
@@ -73,5 +80,14 @@ include '../connect/functions.php';
     </div>
     
     <script src="script.js"></script>
+    <script type="text/javascript">
+      $('.sales_list li').click(function(){
+        var val = $(this).html();
+        val = val.replace(" ","_");
+
+        window.location.hash = val;
+    	location.reload();
+      });
+    </script>
   </body>
 </html>

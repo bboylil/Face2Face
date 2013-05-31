@@ -1,21 +1,27 @@
 <?php
+session_start();
+
+if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'){
+	
+	users($_SESSION['valid_user']);
+}
+
 function rooms(){
-       include 'conecta_bd.php';
-       $sql = "SELECT * FROM rooms";
-       $result = pg_query($dbconn,$sql);
-       
-       $i=1;   
-       while ($row = pg_fetch_assoc($result)){
-		   if($i%2==0){
-               echo "<p style='padding: 0px; border: 1px solid black; width: 300px; background-color: white;'>".$row['nsala']."</p>";
-           }else{
-			   echo "<p style='padding: 0px; margin: 0px; border: 1px solid black;  width: 300px; background-color: #E6E6E6;'> ".$row['nsala']."</p>";
-			   }
-			$i++;
-       }
+	include 'conecta_bd.php';
+	$sql = "SELECT * FROM rooms";
+	$result = pg_query($dbconn,$sql);   
+
+	$salas = pg_fetch_all($result);
+
+	return $salas;
 }
 
 function users($email){
+	if(!$email){
+		echo json_encode(array("code" => 0, "msg" => "Sesión no iniciada"));
+		return;
+	}
+
 	include 'conecta_bd.php';
     
      $sql ="select * from users where email='$email'";
@@ -29,7 +35,8 @@ function users($email){
 			"iduser"  => $iduser,
 			"nick"  => $nick,
 		);
-		echo json_encode($array);
-		return 1;
+
+		echo json_encode(array("code" => 1, "data" => $array));
+		return;
 }
 ?>

@@ -172,7 +172,7 @@ function initChat() {
 
   input.addEventListener('keydown', function(event) {
     var key = event.which || event.keyCode;
-    if(key === 13) {
+    if(key === 13 && input.value != "") {
       chat.send(JSON.stringify({
         "eventName": "chat_msg",
         "data": {
@@ -212,11 +212,29 @@ function init() {
   }
 
 
-  var room = window.location.hash.slice(1);
-  var user_id = Math.floor((Math.random()*10)+1);
+  var room = window.location.hash.slice(1),
+      user_id,
+      username;
+
+  // Obtenemos el ID y nombre de usuario
+  $.ajax({
+    type: "post",
+    dataType: "json",
+    url: "../connect/functions.php",
+    success: function(datos){
+      if(datos.code != 0){
+        
+        user_id = datos.data.iduser;
+        username = datos.data.nick;
+        
+      }else{ window.location = "/"; }
+    }
+  });
+
+  // var user_id = Math.floor((Math.random()*10)+1);
 
   // Conexión por webSocket
-  rtc.connect("ws:192.168.12.190:8080",room);
+  rtc.connect("ws:192.168.0.198:8080",room);
   //rtc.connect("ws:" + window.location.href.substring(window.location.protocol.length).split('#')[0], room);
 
   // Al conectarnos con el websocket, enviamos información del usuario
