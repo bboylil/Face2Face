@@ -76,7 +76,7 @@ body{
   overflow-x: none;
   background: none repeat scroll 0 0 #F9F9F9;
   width: 100%;
-  padding-left: 15px;
+  padding: 15px;
   height: 65%;
 }
 #chatinput {

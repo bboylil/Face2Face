@@ -45,7 +45,8 @@ webRTC.rtc.on('chat_msg', function(data, socket) {
           "data": {
             "messages": data.messages,
             "color": data.color,
-            "user_id": data.user_id
+            "user_id": data.user_id,
+            "username": data.username
           }
         }), function(error) {
           if (error) {

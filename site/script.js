@@ -2,6 +2,7 @@ var videos = [],
     PeerConnection = window.PeerConnection || window.webkitPeerConnection00 || window.webkitRTCPeerConnection || window.mozRTCPeerConnection || window.RTCPeerConnection,
     menuWidth = 250,
     user_id,
+    username,
     color;
 
 function UIresize(){
@@ -68,10 +69,13 @@ function removeVideo(socketId) {
   subdivideVideos();
 }
 
-function addToChat(msg, color) {
+function addToChat(msg, color, user_name) {
   var messages = document.getElementById('messages');
+
+  weigth = (color == "black") ? "bold" : "none";
+
   msg = sanitize(msg);
-  msg = '<div style="color: ' + color + '">' + msg + '</div>';
+  msg = '<span style="color: '+ color +'; font-weight:'+ weigth +'">'+ user_name +'</span><div>' + msg + '</div>';
   
   messages.innerHTML = messages.innerHTML + msg + '<br>';
   messages.scrollTop = 10000;
@@ -164,16 +168,17 @@ function initChat() {
           "messages": input.value,
           "room": room,
           "color": color,
-          "user_id": user_id
+          "user_id": user_id,
+          "username": username
         }
       }));
-      addToChat(input.value,"black");
+      addToChat(input.value,"black",username);
       input.value = "";
     }
   }, false);
   rtc.on(chat.event, function() {
     var data = chat.recv.apply(this, arguments);
-    (data.user_id == user_id) ? addToChat(data.messages,"black") : addToChat(data.messages, data.color.toString(16));
+    (data.user_id == user_id) ? addToChat(data.messages,"black", username) : addToChat(data.messages, data.color.toString(16), data.username);
   });
 }
 
@@ -197,8 +202,7 @@ function init() {
   }
 
 
-  var room = window.location.hash.slice(1),
-      username;
+  var room = window.location.hash.slice(1);
 
   // Obtenemos el ID y nombre de usuario
   $.ajax({
