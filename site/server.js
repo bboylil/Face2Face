@@ -44,9 +44,7 @@ webRTC.rtc.on('chat_msg', function(data, socket) {
           "eventName": "receive_chat_msg",
           "data": {
             "messages": data.messages,
-            "color": data.color,
-            "user_id": data.user_id,
-            "username": data.username
+            "color": data.color
           }
         }), function(error) {
           if (error) {
@@ -121,26 +119,11 @@ webRTC.rtc.on('user_disconnect', function(data, socket){
 });
 
 function getUsers(){
-  var users = new Array(),
-      color,
-      found = 0;
+  var users = new Array();
 
   for(var i in clients){
-    found = 0;
-    for(var j in users){
-      if(users[j].user_id == clients[i].user_id) found = 1;
-    }
-
-    // Nuevo usuario
-    if(!found){
-      // Asignamos color
-      if(clients[i].color == undefined){
-        color = "#" + ((1 << 24) * Math.random() | 0).toString(16);
-        clients[i].color = color;
-      }
-      users.push(clients[i]);
-    }
-    
+    if(users.indexOf(clients[i].user_id) == -1)
+      users.push(clients[i].user_id);
   }
   
   return users;

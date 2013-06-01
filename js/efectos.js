@@ -1,4 +1,3 @@
-
 jQuery(document).ready(function(){ 
     $("#olvido").click(
     	function(){
@@ -7,6 +6,7 @@ jQuery(document).ready(function(){
     	} 
     )
     $(".users").hide();
+
     $("#ver_usuarios").click(
     	function(){
     		$(".rooms").hide();
@@ -20,4 +20,27 @@ jQuery(document).ready(function(){
     		$(".rooms").show();
     	} 
     )
+    
+    
+    //Control de esconder y mostrar div oculto de informacion del usuario
+	$("#panel").hide();
+	$(".pnick").click(
+		function(){
+			 $("#panel").slideDown(1500);
+		}
+	)
+	$(".main").click(
+		function(){
+			 $("#panel").hide();
+			 $(".formpasschange").hide();
+		}
+	)
+	$(".formpasschange").hide();
+	$("#cambiarpass").click(
+		function(){
+			 $("#panel").hide();
+			 $(".formpasschange").slideDown(1500);
+		}
+	)
+	
 }); 

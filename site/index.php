@@ -2,7 +2,7 @@
 session_start();
 include '../connect/conecta_bd.php';
 include '../connect/functions.php';
-
+include '../connect/cambiopass.php';
 if(!$_SESSION['valid_user']) header("Location: /");
 
 ?>
@@ -18,9 +18,14 @@ if(!$_SESSION['valid_user']) header("Location: /");
   </head>
   <body onload="init()">
     <div class="general">
-		<div class='header'>
-			<div class='usu'>
-				<label class='info-head'>
+		<div class='header'> 
+			<div id='inf_us' class='usu'>
+				<table>
+					<tr>
+						<td>
+							<img src='../images/profile.gif' alt='perfil' class='ppic'>
+						</td>
+						<td class='pnick'>
 					<?php
 						$valid_user = $_SESSION['valid_user'];
 						$sql ="select nick from users where email='$valid_user'";
@@ -32,10 +37,23 @@ if(!$_SESSION['valid_user']) header("Location: /");
 							}
 						  }
 					  ?>
-				</label>
-					<a href='../connect/cerrarsesion.php' title='Cerrar sesión'><img class='icon' src='../images/logout.png'></a>
+					  </td>
+					</tr>
+
+				</table>
 			</div>
-		</div> 
+			<div id='panel' class='usu2'>
+				<ul class='lista'>
+					<li  id='cambiarpass' class='elemento'>
+						<a style='text-decoration: none; color: #DDDDDD;' href='#'>Cambiar contraseña</a>
+					</li>
+					<li class='elemento'>
+						<a style='text-decoration: none; color: #DDDDDD;' href='../connect/cerrarsesion.php'>Logout</a>
+					</li>
+				</ul>
+			</div>
+			
+		</div>
 		  <div class="menu">
 			<div id="mostrar">
 						<div class='users'>
@@ -58,17 +76,39 @@ if(!$_SESSION['valid_user']) header("Location: /");
 			
 			</div>
 			<div class="buttonBox">
-				<div id="newRoom" class="button">Nueva Sala</div>
-				<div id="ver_salas" class="button">Salas</div>
-				<div id="ver_usuarios" class="button">Usuarios</div>
+				<input type='button' id="newRoom" class="button" value="+ Sala">
+				<input type='button' id="ver_salas" class="button" value="Salas">
+				<input type='button' id="ver_usuarios" class="button" value="Usuarios">
 		</div>
 			<div id="messages"></div>
 			
 		  </div>
 		<div class='main'>
+			<div class='formpasschange'>
+				<form action='index.php' method='POST'>
+					<label class="titulo">Cambio de contraseña</label><br>
+					<input class="campo" type='Password' name="oldpass" placeholder="Contraseña antigua"><br><br>
+					<label class="titulo">Introduzca su contraseña nueva</label>
+					<input class="campo" type='Password' name="npass1" placeholder="Contraseña"><br>
+					<input class="campo" type='Password' name="npass2" placeholder="Repita la contraseña"><br>
+								<?php
+						if ($error==6){
+							echo "Las contraseña introducida no coincide con la registrada";
+							
+						}else if($error==7){
+							echo "Las contraseñas introducidas deben ser iguales!";
+						}else if($msg==3){
+							echo "La contraseña ha sido cambiada con exito";
+							
+						}
+					?>
+					<input type="submit" id='aceptar' class='button' value='Aceptar'>
+
+					
+				</form>
+			</div>
 
 			<div id="videos">
-
 				<video id="you" class="flip" autoplay width="100%" height="100%" style="position: relative; float:left;"></video>
 			</div>
 			
