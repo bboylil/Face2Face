@@ -72,11 +72,11 @@ body{
 #messages {
   position: relative;
   float: left;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: none;
   background: none repeat scroll 0 0 #F9F9F9;
-  font: 300 18px/40px 'light','Helvetica Neue',Arial,Helvetica,sans-serif;
   width: 100%;
-  letter-spacing: 1px;
+  padding-left: 15px;
   height: 65%;
 }
 #chatinput {
