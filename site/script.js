@@ -131,19 +131,19 @@ var websocketChat = {
   event: 'receive_chat_msg'
 };
 
-var dataChannelChat = {
-  send: function(message) {
-    for(var connection in rtc.dataChannels) {
-      var channel = rtc.dataChannels[connection];
-      console.log(channel);
-      channel.send(message);
-    }
-  },
-  recv: function(channel, message) {
-    return JSON.parse(message).data;
-  },
-  event: 'data stream data'
-};
+// var dataChannelChat = {
+//   send: function(message) {
+//     for(var connection in rtc.dataChannels) {
+//       var channel = rtc.dataChannels[connection];
+//       console.log(channel);
+//       channel.send(message);
+//     }
+//   },
+//   recv: function(channel, message) {
+//     return JSON.parse(message).data;
+//   },
+//   event: 'data stream data'
+// };
 
 function initChat() {
   var chat;
