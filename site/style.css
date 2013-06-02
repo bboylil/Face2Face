@@ -11,7 +11,7 @@ body{
 	padding:0;	
 	position: relative;
 	width: 100%;
-	height:100%;
+	height:auto;
 	float: left;
 }
 
@@ -22,6 +22,7 @@ body{
 	background: -webkit-linear-gradient(#58ACFA, #0080FF);
 	*/
 	position: relative;
+	float: left;
 	height: 75px;
 	width: 100%;
 	margin:0;
@@ -93,17 +94,17 @@ body{
 .menu{
   position: relative;
   float:left;
-  width: 215px;
-  height: 95%;
+  width: 250px;
+  height: 80%;
   border-top:0px;
   border-right: 2px solid #732222;
 }
 
 .main{
 	background-color: #FBEFEF;
-	height: 95%;
+	height: auto;
 	width: auto;
-	margin-left: 215px;
+	margin-left: 250px;
 	/*position: relative;
 	float: left;
 	height: 95%;
@@ -117,7 +118,7 @@ body{
 	float: left;
 	z-index: 0;
 	overflow: none;
-	width: 95%;
+	
 }
 
 #mostrar{
@@ -131,12 +132,12 @@ body{
 #messages {
   position: relative;
   float: left;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: none;
   background: none repeat scroll 0 0 #F9F9F9;
-  font: 300 18px/40px 'light','Helvetica Neue',Arial,Helvetica,sans-serif;
-  width: 100%;
-  letter-spacing: 1px;
-  height: 60%;
+  width: 220px;
+  padding: 15px;
+  height: 65%;
 }
 #chatinput {
 	position: relative;

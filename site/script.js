@@ -6,49 +6,49 @@ var videos = [],
     color;
 
 function UIresize(){
-  var videosWidth = window.innerWidth - menuWidth;
-  document.getElementById('videos').style.width = videosWidth;
+  // var videosWidth = window.innerWidth - menuWidth;
+  // document.getElementById('videos').style.width = videosWidth;
 }
 
 function subdivideVideos() {
-  var numVideos = videos.length,
-      videosHeight = window.innerHeight,
-      videosWidth = videosHeight / 0.75;
+  // var numVideos = videos.length,
+  //     videosHeight = window.innerHeight,
+  //     videosWidth = videosHeight / 0.75;
 
-  if(videosWidth > (window.innerWidth - menuWidth)){
-    videosWidth = window.innerWidth - menuWidth;
-  }
+  // if(videosWidth > (window.innerWidth - menuWidth)){
+  //   videosWidth = window.innerWidth - menuWidth;
+  // }
 
-  document.getElementById('videos').style.width = videosWidth;
-  document.getElementById('videos').style.height = videosHeight;
+  // document.getElementById('videos').style.width = videosWidth;
+  // document.getElementById('videos').style.height = videosHeight;
 
-  // Local streaming
-  if(!numVideos){
-    document.getElementById('you').style.width = videosWidth;
-    document.getElementById('you').style.height = videosHeight;
+  // // Local streaming
+  // if(!numVideos){
+  //   document.getElementById('you').style.width = videosWidth;
+  //   document.getElementById('you').style.height = videosHeight;
 
-  // Hasta 4 clientes
-  }else if(numVideos > 0 && numVideos < 4){
-    document.getElementById('you').style.width = videosWidth/2;
-    document.getElementById('you').style.height = videosHeight/2;
+  // // Hasta 4 clientes
+  // }else if(numVideos > 0 && numVideos < 4){
+  //   document.getElementById('you').style.width = videosWidth/2;
+  //   document.getElementById('you').style.height = videosHeight/2;
 
-    for(i in videos){
-      var video = videos[i];
-      video.style.width = videosWidth/2;
-      video.style.height = videosHeight/2;
-    }
+  //   for(i in videos){
+  //     var video = videos[i];
+  //     video.style.width = videosWidth/2;
+  //     video.style.height = videosHeight/2;
+  //   }
 
-  // Hasta 9 clientes
-  }else{
-    document.getElementById('you').style.width = videosWidth/3;
-    document.getElementById('you').style.height = videosHeight/3;
+  // // Hasta 9 clientes
+  // }else{
+  //   document.getElementById('you').style.width = videosWidth/3;
+  //   document.getElementById('you').style.height = videosHeight/3;
 
-    for(i in videos){
-      var video = videos[i];
-      video.style.width = videosWidth/3;
-      video.style.height = videosHeight/3;
-    }
-  }
+  //   for(i in videos){
+  //     var video = videos[i];
+  //     video.style.width = videosWidth/3;
+  //     video.style.height = videosHeight/3;
+  //   }
+  // }
 }
 
 function cloneVideo(domId, socketId) {
