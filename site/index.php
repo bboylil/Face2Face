@@ -61,7 +61,7 @@ if(!$_SESSION['valid_user']) header("Location: /");
 				<div id="newRoom" class="button">Nueva Sala</div>
 				<div id="ver_salas" class="button">Salas</div>
 				<div id="ver_usuarios" class="button">Usuarios</div>
-		</div>
+			</div>
 			<div id="messages"></div>
 			
 		  </div>

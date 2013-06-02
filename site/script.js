@@ -232,7 +232,9 @@ function init() {
     webSocket.send(JSON.stringify({
         "eventName": "user_connect",
         "data": {
-          "user_id": user_id
+          "user_id": user_id,
+          "username": username,
+          "room": room
         }
       }));
   });
@@ -241,11 +243,11 @@ function init() {
   rtc.on('receive_status', function(data){
     var text = "";
     $.each(data.users, function(i, val){
-      if(val.user_id != user_id)
-        text += "<li>Usuario "+val.user_id+"</li>";
+      if((val.user_id != user_id) && val.room == room)
+        text += "<li>"+val.username+"</li>";
       // Soy yo
-      else{
-        // Asignamos color
+      else if(val.user_id == user_id){
+        // Asignamos color al cliente
         color = val.color;
       }
     });
@@ -280,7 +282,8 @@ function init() {
     webSocket.send(JSON.stringify({
       "eventName": "user_disconnect",
       "data": {
-        "socket_id": data
+        "socket_id": data,
+        "room": room
       }
     }));
 

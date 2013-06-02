@@ -65,7 +65,9 @@ webRTC.rtc.on('user_connect', function(data, socket){
   // Añadimos nuevo cliente al array
   var o = {
     "socket_id": socket.id,
-    "user_id": data.user_id
+    "user_id": data.user_id,
+    "username": data.username,
+    "room": data.room
   };
   clients.push(o);
   
