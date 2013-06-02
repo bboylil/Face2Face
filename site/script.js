@@ -1,6 +1,9 @@
 var videos = [],
     PeerConnection = window.PeerConnection || window.webkitPeerConnection00 || window.webkitRTCPeerConnection || window.mozRTCPeerConnection || window.RTCPeerConnection,
-    menuWidth = 250;
+    menuWidth = 250,
+    user_id,
+    username,
+    color;
 
 function UIresize(){
   var videosWidth = window.innerWidth - menuWidth;
@@ -66,14 +69,14 @@ function removeVideo(socketId) {
   subdivideVideos();
 }
 
-function addToChat(msg, color) {
+function addToChat(msg, color, user_name) {
   var messages = document.getElementById('messages');
+
+  weigth = (color == "black") ? "bold" : "none";
+
   msg = sanitize(msg);
-  if(color) {
-    msg = '<span style="color: ' + color + '; padding-left: 15px">' + msg + '</span>';
-  } else {
-    msg = '<strong style="padding-left: 15px">' + msg + '</strong>';
-  }
+  msg = '<span style="color: '+ color +'; font-weight:'+ weigth +'">'+ user_name +'</span><div>' + msg + '</div>';
+  
   messages.innerHTML = messages.innerHTML + msg + '<br>';
   messages.scrollTop = 10000;
 }
@@ -154,21 +157,7 @@ function initChat() {
   // }
 
   var input = document.getElementById("chatinput");
-  //var toggleHideShow = document.getElementById("hideShowMessages");
   var room = window.location.hash.slice(1);
-  var color = "#" + ((1 << 24) * Math.random() | 0).toString(16);
-
-  // toggleHideShow.addEventListener('click', function() {
-  //   var element = document.getElementById("messages");
-
-  //   if(element.style.display === "block") {
-  //     element.style.display = "none";
-  //   }
-  //   else {
-  //     element.style.display = "block";
-  //   }
-
-  // });
 
   input.addEventListener('keydown', function(event) {
     var key = event.which || event.keyCode;
@@ -178,17 +167,18 @@ function initChat() {
         "data": {
           "messages": input.value,
           "room": room,
-          "color": color
+          "color": color,
+          "user_id": user_id,
+          "username": username
         }
       }));
-      addToChat(input.value);
+      addToChat(input.value,"black",username);
       input.value = "";
     }
   }, false);
   rtc.on(chat.event, function() {
     var data = chat.recv.apply(this, arguments);
-    console.log(data.color);
-    addToChat(data.messages, data.color.toString(16));
+    (data.user_id == user_id) ? addToChat(data.messages,"black", username) : addToChat(data.messages, data.color.toString(16), data.username);
   });
 }
 
@@ -212,9 +202,7 @@ function init() {
   }
 
 
-  var room = window.location.hash.slice(1),
-      user_id,
-      username;
+  var room = window.location.hash.slice(1);
 
   // Obtenemos el ID y nombre de usuario
   $.ajax({
@@ -226,6 +214,10 @@ function init() {
         
         user_id = datos.data.iduser;
         username = datos.data.nick;
+
+        // Conexión por webSocket
+        rtc.connect("ws:192.168.0.198:8080",room);
+        //rtc.connect("ws:" + window.location.href.substring(window.location.protocol.length).split('#')[0], room);
         
       }else{ window.location = "/"; }
     }
@@ -233,9 +225,7 @@ function init() {
 
   // var user_id = Math.floor((Math.random()*10)+1);
 
-  // Conexión por webSocket
-  rtc.connect("ws:192.168.0.198:8080",room);
-  //rtc.connect("ws:" + window.location.href.substring(window.location.protocol.length).split('#')[0], room);
+  
 
   // Al conectarnos con el websocket, enviamos información del usuario
   rtc.on('connect', function(data){
@@ -251,7 +241,6 @@ function init() {
 
   // Listener que recibe actualización de estado de usuarios
   rtc.on('receive_status', function(data){
-    console.log(data);
     var text = "";
     $.each(data.users, function(i, val){
       if((val.user_id != user_id) && val.room == room)
