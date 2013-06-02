@@ -26,21 +26,25 @@ jQuery(document).ready(function(){
 	$("#panel").hide();
 	$(".pnick").click(
 		function(){
-			 $("#panel").slideDown(1500);
+			 $("#panel").slideDown(500);
 		}
 	)
 	$(".main").click(
 		function(){
 			 $("#panel").hide();
-			 $(".formpasschange").hide();
 		}
 	)
-	$(".formpasschange").hide();
+
+	$(".passchange").hide();
 	$("#cambiarpass").click(
 		function(){
 			 $("#panel").hide();
-			 $(".formpasschange").slideDown(1500);
+			 $(".passchange").slideDown(500);
 		}
 	)
-	
+	$(".cerrar").click(
+		function(){
+			 $(".passchange").slideUp();
+		}
+	)
 }); 

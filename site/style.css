@@ -22,30 +22,30 @@ body{
 	background: -webkit-linear-gradient(#58ACFA, #0080FF);
 	*/
 	position: relative;
-	height: 9%;
+	height: 75px;
+	width: 100%;
 	margin:0;
 	padding-top: 0px;
 	padding-bottom: 0px;
 }
 .usu{
 	position:relative;
-	height: 93%;
-	width: 15%;
+	height: 100%;
+	width: 200px;
 	margin-left: 65%;
 	background-color: #954646;
 	/*
 	background: -moz-linear-gradient(#FACC2E, #FE9A2E);
 	background: -webkit-linear-gradient(#FACC2E, #FE9A2E);
 	*/
-	padding-top: 5px;
 	border-radius: 2px 2px 2px 2px;
 	color: white;
 }
 .usu2{
 	color: white;
 	position:relative;
-	height: 93%;
-	width: 15%;
+	height: 69px;
+	width: 200px;
 	margin-left: 65%;
 	background-color: #954646;
 	padding-top: 5px;
@@ -57,18 +57,25 @@ body{
 
 /*imagen del perfil*/
 .ppic{
-	height: 50px;
-	width: 50px;
-	margin-left: 15px;
-	margin-right: 5px;
+	position:relative;
+	height: 22%;
+	width: 100%;
 	border: 1px solid #3B240B;
+	padding: 0;
 }
-
-/*Nombre del usuario*/
+/*Row de la imagen*/
+.filafoto{
+	width: 30%;
+	
+}
+/*Row de la tabla del nombre del usuario*/
 .pnick{
 	font: 18px 'light','Helvetica Neue',Arial,Helvetica,sans-serif;
 	text-decoration:underline;
 	color: white;
+	padding: 0;
+	width: 70%;
+	padding-left: 10%;
 }
 
 .elemento{
@@ -86,7 +93,7 @@ body{
 .menu{
   position: relative;
   float:left;
-  width: 20%;
+  width: 215px;
   height: 95%;
   border-top:0px;
   border-right: 2px solid #732222;
@@ -95,11 +102,12 @@ body{
 .main{
 	background-color: #FBEFEF;
 	height: 95%;
-	width: 80%;
-	margin-left: 20%;
+	width: auto;
+	margin-left: 215px;
 }
 
 #videos {
+	position:absolute;
 	margin: 0px;
 	float: left;
 	z-index: 0;
@@ -114,11 +122,7 @@ body{
   height: 30%;
   overflow: scroll;
 }
-#buttonBox{
-	position:relative;
-	height: 10%;
-	background-color: blue;
-}
+
 #messages {
   position: relative;
   float: left;
@@ -127,7 +131,7 @@ body{
   font: 300 18px/40px 'light','Helvetica Neue',Arial,Helvetica,sans-serif;
   width: 100%;
   letter-spacing: 1px;
-  height: 65%;
+  height: 60%;
 }
 #chatinput {
 	position: relative;
@@ -180,11 +184,12 @@ body{
 
 .buttonBox {
   position: relative;
-  background-color: #732222;
+  background-color: #A95D5D;
   float: left;
   width: 100%;
-  height: auto;
+  height: 42px;
   z-index: 1;
+  text-align:center;
 }
 .button{
     background-repeat: no-repeat;
@@ -211,22 +216,39 @@ body{
 	width: 100%;
 }
 
-.formpasschange{
+.passchange{
 	color: white;
-	position:absolute;
+	position: absolute;
 	background-color: #A95D5D;
-	width: 40%;
-	height: 35%;
+	width: 318px;
+	height: 350px;
 	z-index: 555;
 	border-radius: 2px;
 	border:2px solid #732222;
-	margin-left: 20%;
-	margin-top: 10%;
-	font-size: 16px;
+	margin: 10% 10% 0;
+	font-size: 14px;
 	text-align:center;
 	box-shadow: 10px 10px 5px #888;
 
 }
+.formpasschange{
+	margin-top: 20px;
+}
+.cerrar{
+	border-radius: 50%;
+	width: 20px;
+	height: 20px;
+	background-color: #732222;
+	color: white;
+	border:1px solid white;
+	float: right;
+	position:relative;
+	font: 18px 'light','Helvetica Neue',Arial,Helvetica,sans-serif;
+	margin-right:5px;
+	margin-top: 5px;
+}
+
+
 .titulo{
 	height: 30px;
 	font: 300 18px/40px 'light','Helvetica Neue',Arial,Helvetica,sans-serif;
@@ -251,14 +273,14 @@ body{
 
 }
 #aceptar{
-	margin-top: 5%;
+	position: relative;
 	background: -moz-linear-gradient(#58ACFA, #0080FF);
 	background: -webkit-linear-gradient(#58ACFA, #0080FF);
 	color: white;
 	width: 100px; 
 }
 #aceptar:hover{
-	margin-top: 5%;
+	position:relative;
 	background: -moz-linear-gradient(#58ACFA, #0040FF);
 	background: -webkit-linear-gradient(#58ACFA, #0040FF);
 	color: white;
@@ -294,3 +316,10 @@ body{
 	background: -webkit-linear-gradient(#FACC2E, #DF7401);
 	color: #3B240B;
 }
+.errores{
+	margin-top: 20px;
+	text-align:center;
+	height: 30px;
+	
+}
+

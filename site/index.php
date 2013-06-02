@@ -22,21 +22,21 @@ if(!$_SESSION['valid_user']) header("Location: /");
 			<div id='inf_us' class='usu'>
 				<table>
 					<tr>
-						<td>
+						<td class='filafoto'>
 							<img src='../images/profile.gif' alt='perfil' class='ppic'>
 						</td>
 						<td class='pnick'>
-					<?php
-						$valid_user = $_SESSION['valid_user'];
-						$sql ="select nick from users where email='$valid_user'";
-						$result = pg_query($sql) or die('La consulta ha fallat: ' . pg_last_error());
-				  
-						  if (!empty($_SESSION["valid_user"])){
-							 while ($row = pg_fetch_assoc($result)) {
-								echo $row['nick'];
-							}
-						  }
-					  ?>
+							<?php
+								$valid_user = $_SESSION['valid_user'];
+								$sql ="select nick from users where email='$valid_user'";
+								$result = pg_query($sql) or die('La consulta ha fallat: ' . pg_last_error());
+						  
+								  if (!empty($_SESSION["valid_user"])){
+									 while ($row = pg_fetch_assoc($result)) {
+										echo "<a href=# style='color:white;'>".$row['nick']."</a>";
+									}
+								  }
+							  ?>
 					  </td>
 					</tr>
 
@@ -77,23 +77,31 @@ if(!$_SESSION['valid_user']) header("Location: /");
 			</div>
 			<div class="buttonBox">
 				<input type='button' id="newRoom" class="button" value="+ Sala">
-				<input type='button' id="ver_salas" class="button" value="Salas">
 				<input type='button' id="ver_usuarios" class="button" value="Usuarios">
-		</div>
+				<input type='button' id="ver_salas" class="button" value="Salas">
+				
+			</div>
 			<div id="messages"></div>
 			
 		  </div>
 		<div class='main'>
-			<div class='formpasschange'>
-				<form action='index.php' method='POST'>
-					<label class="titulo">Cambio de contraseña</label><br>
-					<input class="campo" type='Password' name="oldpass" placeholder="Contraseña antigua"><br><br>
-					<label class="titulo">Introduzca su contraseña nueva</label>
-					<input class="campo" type='Password' name="npass1" placeholder="Contraseña"><br>
-					<input class="campo" type='Password' name="npass2" placeholder="Repita la contraseña"><br>
-								<?php
+			<div class='passchange'>
+				<div style='width: 100%; height: 30px;'>
+					<label class="titulo">Cambio de contraseña</label>
+					<a style='text-decoration:none' href='#'><div id='cerrar' class='cerrar'>X</div>	</a>				
+				</div>
+				<hr style='border: 1px solid #732222;'>
+				<form action='index.php' method='POST' class='formpasschange'>
+					<input class="campo" type='Password' name="oldpass" required="required" placeholder="Contraseña actual"><br><br>
+					<hr style='border: 1px solid #732222;'>
+					<label class="titulo">Introduzca su contraseña nueva</label><br>
+					<hr style='border: 1px solid #732222;'>
+					<input class="campo" type='Password' name="npass1" required="required" placeholder="Contraseña"><br>
+					<input class="campo" type='Password' name="npass2" required="required" placeholder="Repita la contraseña"><br>
+					<div class='errores'>
+					<?php
 						if ($error==6){
-							echo "Las contraseña introducida no coincide con la registrada";
+							echo "Esa no es la contraseña actual";
 							
 						}else if($error==7){
 							echo "Las contraseñas introducidas deben ser iguales!";
@@ -102,6 +110,7 @@ if(!$_SESSION['valid_user']) header("Location: /");
 							
 						}
 					?>
+					</div>
 					<input type="submit" id='aceptar' class='button' value='Aceptar'>
 
 					
