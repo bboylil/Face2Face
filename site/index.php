@@ -60,9 +60,6 @@ if(!$_SESSION['valid_user']) header("Location: /");
 							<ul class="users_list">
             
           					</ul>
-							<?php
-							//users($valid_user);
-							?>
 						</div>
 						<div class='rooms'>
 							<ul class="sales_list">
@@ -79,7 +76,6 @@ if(!$_SESSION['valid_user']) header("Location: /");
 				<input type='button' id="newRoom" class="button" value="+ Sala">
 				<input type='button' id="ver_usuarios" class="button" value="Usuarios">
 				<input type='button' id="ver_salas" class="button" value="Salas">
-				
 			</div>
 			<div id="messages"></div>
 			

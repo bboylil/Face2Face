@@ -128,19 +128,19 @@ var websocketChat = {
   event: 'receive_chat_msg'
 };
 
-var dataChannelChat = {
-  send: function(message) {
-    for(var connection in rtc.dataChannels) {
-      var channel = rtc.dataChannels[connection];
-      console.log(channel);
-      channel.send(message);
-    }
-  },
-  recv: function(channel, message) {
-    return JSON.parse(message).data;
-  },
-  event: 'data stream data'
-};
+// var dataChannelChat = {
+//   send: function(message) {
+//     for(var connection in rtc.dataChannels) {
+//       var channel = rtc.dataChannels[connection];
+//       console.log(channel);
+//       channel.send(message);
+//     }
+//   },
+//   recv: function(channel, message) {
+//     return JSON.parse(message).data;
+//   },
+//   event: 'data stream data'
+// };
 
 function initChat() {
   var chat;
@@ -242,17 +242,25 @@ function init() {
     webSocket.send(JSON.stringify({
         "eventName": "user_connect",
         "data": {
-          "user_id": user_id
+          "user_id": user_id,
+          "username": username,
+          "room": room
         }
       }));
   });
 
   // Listener que recibe actualización de estado de usuarios
   rtc.on('receive_status', function(data){
+    console.log(data);
     var text = "";
     $.each(data.users, function(i, val){
-      if(val != user_id)
-        text += "<li>Usuario "+val+"</li>";
+      if((val.user_id != user_id) && val.room == room)
+        text += "<li>"+val.username+"</li>";
+      // Soy yo
+      else if(val.user_id == user_id){
+        // Asignamos color al cliente
+        color = val.color;
+      }
     });
     
     // Insertamos usuarios en DOM
@@ -285,7 +293,8 @@ function init() {
     webSocket.send(JSON.stringify({
       "eventName": "user_disconnect",
       "data": {
-        "socket_id": data
+        "socket_id": data,
+        "room": room
       }
     }));
 
