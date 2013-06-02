@@ -42,9 +42,6 @@ if(!$_SESSION['valid_user']) header("Location: /");
 							<ul class="users_list">
             
           					</ul>
-							<?php
-							//users($valid_user);
-							?>
 						</div>
 						<div class='rooms'>
 							<ul class="sales_list">
