@@ -1,18 +1,27 @@
 var videos = [],
     PeerConnection = window.PeerConnection || window.webkitPeerConnection00 || window.webkitRTCPeerConnection || window.mozRTCPeerConnection || window.RTCPeerConnection,
-    menuWidth = 250,
+    menuWidth = 280,
+    headerHeight = 75,
+    chatInputHeight = 60,
     user_id,
     username,
     color;
 
 function UIresize(){
+  // Ancho
   // var videosWidth = window.innerWidth - menuWidth;
   // document.getElementById('videos').style.width = videosWidth;
+  // document.getElementById('main').style.width = videosWidth;
+
+  // // Altura
+  // var menuHeight = window.innerHeight - headerHeight - chatInputHeight;
+  // document.getElementById('menu').style.height = menuHeight;  
+  // document.getElementById('main').style.height = window.innerHeight - headerHeight;
 }
 
 function subdivideVideos() {
   // var numVideos = videos.length,
-  //     videosHeight = window.innerHeight,
+  //     videosHeight = window.innerHeight - headerHeight - chatInputHeight,
   //     videosWidth = videosHeight / 0.75;
 
   // if(videosWidth > (window.innerWidth - menuWidth)){

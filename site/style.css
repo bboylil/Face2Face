@@ -102,13 +102,10 @@ body{
 
 .main{
 	background-color: #FBEFEF;
-	height: auto;
-	width: auto;
-	margin-left: 250px;
-	/*position: relative;
+	position: relative;
 	float: left;
-	height: 95%;
-	width: 80%;*/
+	height: 40%;
+	width: 40%;
 	/*margin-left: 20%;*/
 }
 
@@ -132,16 +129,18 @@ body{
 #messages {
   position: relative;
   float: left;
-  overflow-y: scroll;
   overflow-x: none;
+  overflow-y: scroll;
   background: none repeat scroll 0 0 #F9F9F9;
   width: 220px;
   padding: 15px;
   height: 65%;
 }
 #chatinput {
-	position: relative;
-	height: 10%;
+	position: absolute;
+	bottom:0;
+
+	height: 60px;
 	width: 100%;
 	background: none repeat scroll 0 0 #F9F9F9;
 	border: 1px solid #CCCCCC;

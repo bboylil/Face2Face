@@ -54,7 +54,7 @@ if(!$_SESSION['valid_user']) header("Location: /");
 			</div>
 			
 		</div>
-		  <div class="menu">
+		  <div id="menu" class="menu">
 			<div id="mostrar">
 						<div class='users'>
 							<ul class="users_list">
@@ -80,7 +80,7 @@ if(!$_SESSION['valid_user']) header("Location: /");
 			<div id="messages"></div>
 			
 		  </div>
-		<div class='main'>
+		<div id="main" class='main'>
 			<div class='passchange'>
 				<div style='width: 100%; height: 30px;'>
 					<label class="titulo">Cambio de contraseña</label>
