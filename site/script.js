@@ -300,6 +300,7 @@ function init() {
   //initFullScreen();
   initNewRoom();
   initChat();
+
 }
 
 window.onresize = function(event) {

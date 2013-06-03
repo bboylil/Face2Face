@@ -81,32 +81,20 @@ if(!$_SESSION['valid_user']) header("Location: /");
 			
 		  </div>
 		<div id="main" class='main'>
-			<div class='passchange'>
+			<div id="passchange" class='passchange'>
 				<div style='width: 100%; height: 30px;'>
 					<label class="titulo">Cambio de contraseña</label>
 					<a style='text-decoration:none' href='#'><div id='cerrar' class='cerrar'>X</div>	</a>				
 				</div>
 				<hr style='border: 1px solid #732222;'>
 				<form action='index.php' method='POST' class='formpasschange'>
-					<input class="campo" type='Password' name="oldpass" required="required" placeholder="Contraseña actual"><br><br>
+					<input id="oldpass" class="campo" type='Password' name="oldpass" required="required" placeholder="Contraseña actual"><br><br>
 					<hr style='border: 1px solid #732222;'>
 					<label class="titulo">Introduzca su contraseña nueva</label><br>
 					<hr style='border: 1px solid #732222;'>
-					<input class="campo" type='Password' name="npass1" required="required" placeholder="Contraseña"><br>
-					<input class="campo" type='Password' name="npass2" required="required" placeholder="Repita la contraseña"><br>
-					<div class='errores'>
-					<?php
-						if ($error==6){
-							echo "Esa no es la contraseña actual";
-							
-						}else if($error==7){
-							echo "Las contraseñas introducidas deben ser iguales!";
-						}else if($msg==3){
-							echo "La contraseña ha sido cambiada con exito";
-							
-						}
-					?>
-					</div>
+					<input id="newpass1" class="campo" type='Password' name="npass1" required="required" placeholder="Contraseña"><br>
+					<input id="newpass2" class="campo" type='Password' name="npass2" required="required" placeholder="Repita la contraseña"><br>
+					<div id="errores" class='errores'></div>
 					<input type="submit" id='aceptar' class='button' value='Aceptar'>
 
 					
