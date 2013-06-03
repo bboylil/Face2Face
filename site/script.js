@@ -105,9 +105,9 @@ function initFullScreen() {
 
 function initNewRoom() {
   var button = document.getElementById("newRoom");
-
+ var button2 = document.getE
   button.addEventListener('click', function(event) {
-
+/*
     var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
     var string_length = 8;
     var randomstring = '';
@@ -115,9 +115,10 @@ function initNewRoom() {
       var rnum = Math.floor(Math.random() * chars.length);
       randomstring += chars.substring(rnum, rnum + 1);
     }
+*/
 
-    window.location.hash = randomstring;
-    location.reload();
+   window.location.hash = randomstring;
+   location.reload();
   })
 }
 
@@ -300,7 +301,15 @@ function init() {
   //initFullScreen();
   initNewRoom();
   initChat();
+  
+  var nameroom = window.location.hash.slice(1);
 
+	nameroom=nameroom.replace("_"," ");
+
+  if(nameroom == "") nameroom = "General";
+
+  $('#cabecera_sala').html(nameroom).show();
+  $('#divisor').show();
 }
 
 window.onresize = function(event) {

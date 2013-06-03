@@ -16,14 +16,12 @@ body{
 }
 
 .header{
-	background-color: #732222;
-	/*
-	background: -moz-linear-gradient(#58ACFA, #0080FF);
-	background: -webkit-linear-gradient(#58ACFA, #0080FF);
-	*/
+	background: -moz-linear-gradient(#954646, #732222);
+	background: -webkit-linear-gradient(#954646, #732222);
+	/*background-color: #732222;*/
 	position: relative;
 	float: left;
-	height: 75px;
+	height: 60px;
 	width: 100%;
 	margin:0;
 	padding-top: 0px;
@@ -34,11 +32,8 @@ body{
 	height: 100%;
 	width: 200px;
 	margin-left: 65%;
-	background-color: #954646;
-	/*
-	background: -moz-linear-gradient(#FACC2E, #FE9A2E);
-	background: -webkit-linear-gradient(#FACC2E, #FE9A2E);
-	*/
+	background: -moz-linear-gradient(#954646, #732222);
+	background: -webkit-linear-gradient(#954646, #732222);
 	border-radius: 2px 2px 2px 2px;
 	color: white;
 }
@@ -48,7 +43,7 @@ body{
 	height: 69px;
 	width: 200px;
 	margin-left: 65%;
-	background-color: #954646;
+	background-color: #732222;
 	padding-top: 5px;
 	border-radius: 0px 0px 4px 4px;
 	z-index: 500;
@@ -59,7 +54,7 @@ body{
 /*imagen del perfil*/
 .ppic{
 	position:relative;
-	height: 22%;
+	height: auto;
 	width: 100%;
 	border: 1px solid #3B240B;
 	padding: 0;
@@ -89,12 +84,13 @@ body{
 
 
 .elemento:hover {
-	background-color: #732222;
+	background-color: #A95D5D;
 }
 .menu{
   position: relative;
   float:left;
   width: 250px;
+  min-width: 200px;
   height: 80%;
   border-top:0px;
   border-right: 2px solid #732222;
@@ -104,8 +100,8 @@ body{
 	background-color: #FBEFEF;
 	position: relative;
 	float: left;
-	height: 40%;
-	width: 40%;
+	height: 90%;
+	width: 80%;
 	/*margin-left: 20%;*/
 }
 
@@ -134,8 +130,22 @@ body{
   background: none repeat scroll 0 0 #F9F9F9;
   width: 220px;
   padding: 15px;
-  height: 65%;
+  height: 70%;
+  padding-top: 0;
 }
+#cabecera_sala{
+	height: 30px;
+	position:relative;
+	display:none;
+	margin-top: 8;
+	color: #732222;
+	width: 100%;
+	text-align:center;
+	padding:0;
+	font-size: 20px;
+}
+
+
 #chatinput {
 	position: absolute;
 	bottom:0;
@@ -143,11 +153,13 @@ body{
 	height: 60px;
 	width: 100%;
 	background: none repeat scroll 0 0 #F9F9F9;
-	border: 1px solid #CCCCCC;
+	border: 1px solid #732222;
 	font: 300 18px/40px 'light','Helvetica Neue',Arial,Helvetica,sans-serif;
 	letter-spacing: 1px;
 	margin-bottom: 0px;
 }
+
+
 
 .users_list{
   padding:0;
@@ -189,7 +201,7 @@ body{
 
 .buttonBox {
   position: relative;
-  background-color: #A95D5D;
+  background-color: #732222;
   float: left;
   width: 100%;
   height: 42px;
@@ -218,26 +230,35 @@ body{
 	height: 25px;
 }
 .users{
+	background-color:#FBEFEF;
 	position: relative;
 	float: left;
 	width: inherit;
+	height: 100%;
 }
 .rooms{
+	background-color:#FBEFEF;
 	position: relative;
 	float: left;
 	width: inherit;
+	height: 100%;
+}
+
+.nroom{
+	background-color:#FBEFEF;
+	height: 100%;
 }
 
 .passchange{
 	color: white;
-	position: absolute;
+	position: relative;
 	background-color: #A95D5D;
-	width: 318px;
+	width: 500px;
 	height: 350px;
 	z-index: 555;
 	border-radius: 2px;
 	border:2px solid #732222;
-	margin: 10% 10% 0;
+	margin: 10% auto 0;
 	font-size: 14px;
 	text-align:center;
 	box-shadow: 10px 10px 5px #888;

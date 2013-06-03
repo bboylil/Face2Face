@@ -3,6 +3,8 @@ session_start();
 include '../connect/conecta_bd.php';
 include '../connect/functions.php';
 include '../connect/cambiopass.php';
+include '../connect/nuevasala.php';
+
 if(!$_SESSION['valid_user']) header("Location: /");
 
 ?>
@@ -57,11 +59,13 @@ if(!$_SESSION['valid_user']) header("Location: /");
 		  <div id="menu" class="menu">
 			<div id="mostrar">
 						<div class='users'>
+							<div style="background-color: #732222; color: white; width: 100%;text-align:center;font: 18px 'light','Helvetica Neue',Arial,Helvetica,sans-serif;">Usuarios</div>
 							<ul class="users_list">
-            
+									
           					</ul>
 						</div>
 						<div class='rooms'>
+							<div style="background-color: #732222; color: white; width: 100%;text-align:center;font: 18px 'light','Helvetica Neue',Arial,Helvetica,sans-serif;">Salas</div>
 							<ul class="sales_list">
 								<?php
 								$salas = rooms();
@@ -70,31 +74,60 @@ if(!$_SESSION['valid_user']) header("Location: /");
 								<?php } ?>
 							</ul>
 						</div>
-			
+						<div class='nroom'>
+							<div style="background-color: #732222; color: white; width: 100%;text-align:center;font: 18px 'light','Helvetica Neue',Arial,Helvetica,sans-serif;">Sala nueva</div><br>
+							<form style='text-align:center;' action='index.php' method='POST'>
+								<input type='text' style='width: 90%;' class='campo' name='nsala' placeholder='Nombre de la sala'>
+								<input type='text' style='width: 90%;' class='campo' name='ntopic' placeholder='Nombre del topic'>
+								<input type='submit' id='aceptar' class='button' name='ok' value='Aceptar'><br>
+								<?php
+								if ($error==8){
+									echo "<label style='color: #732222;'>Esa sala ya existe</label>";	
+								}else if($msg==4){
+									header('Location: index.php');
+								}
+							?>
+							</form>
+						</div>
 			</div>
 			<div class="buttonBox">
 				<input type='button' id="newRoom" class="button" value="+ Sala">
 				<input type='button' id="ver_usuarios" class="button" value="Usuarios">
 				<input type='button' id="ver_salas" class="button" value="Salas">
 			</div>
-			<div id="messages"></div>
+			<div id="messages">
+				<div id='cabecera_sala' class='cabecera_sala'></div>
+				<hr id='divisor' style='border: 1px solid #732222;'>
+			</div>
 			
 		  </div>
 		<div id="main" class='main'>
-			<div id="passchange" class='passchange'>
+			<div id='passchange' class='passchange' style="display:none">
 				<div style='width: 100%; height: 30px;'>
 					<label class="titulo">Cambio de contraseña</label>
 					<a style='text-decoration:none' href='#'><div id='cerrar' class='cerrar'>X</div>	</a>				
 				</div>
 				<hr style='border: 1px solid #732222;'>
 				<form action='index.php' method='POST' class='formpasschange'>
-					<input id="oldpass" class="campo" type='Password' name="oldpass" required="required" placeholder="Contraseña actual"><br><br>
+					<input class="campo" type='Password' name="oldpass" required="required" placeholder="Contraseña actual"><br><br>
 					<hr style='border: 1px solid #732222;'>
 					<label class="titulo">Introduzca su contraseña nueva</label><br>
 					<hr style='border: 1px solid #732222;'>
-					<input id="newpass1" class="campo" type='Password' name="npass1" required="required" placeholder="Contraseña"><br>
-					<input id="newpass2" class="campo" type='Password' name="npass2" required="required" placeholder="Repita la contraseña"><br>
-					<div id="errores" class='errores'></div>
+					<input class="campo" type='Password' name="npass1" required="required" placeholder="Contraseña"><br>
+					<input class="campo" type='Password' name="npass2" required="required" placeholder="Repita la contraseña"><br>
+					<div class='errores'>
+					<?php
+						if ($error==6){
+							echo "Esa no es la contraseña actual";
+							
+						}else if($error==7){
+							echo "Las contraseñas introducidas deben ser iguales!";
+						}else if($msg==3){
+							echo "La contraseña ha sido cambiada con exito";
+							
+						}
+					?>
+					</div>
 					<input type="submit" id='aceptar' class='button' value='Aceptar'>
 
 					
