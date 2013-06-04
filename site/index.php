@@ -6,7 +6,7 @@ include '../connect/cambiopass.php';
 include '../connect/nuevasala.php';
 
 if(!$_SESSION['valid_user']) header("Location: /");
-
+ob_start();
 ?>
 
 <html>

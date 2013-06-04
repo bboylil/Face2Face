@@ -109,6 +109,7 @@ body{
 
 #videos {
 	position:absolute;
+	float:left;
 	margin: 0px;
 	z-index: 0;
 	overflow: none;

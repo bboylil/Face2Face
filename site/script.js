@@ -75,7 +75,7 @@ function subdivideVideos() {
     videosWidth = generalWidth - menuWidth;
   }
 
-  document.getElementById('videos').style.width = videosWidth;
+  document.getElementById('videos').style.width = videosWidth + 5;
   document.getElementById('videos').style.height = videosHeight;
 
   // Local streaming
