@@ -3,6 +3,8 @@ session_start();
 include '../connect/conecta_bd.php';
 include '../connect/functions.php';
 include '../connect/cambiopass.php';
+include '../connect/nuevasala.php';
+
 if(!$_SESSION['valid_user']) header("Location: /");
 
 ?>
@@ -57,11 +59,13 @@ if(!$_SESSION['valid_user']) header("Location: /");
 		  <div id="menu" class="menu">
 			<div id="mostrar">
 						<div class='users'>
+							<div style="background-color: #732222; color: white; width: 100%;text-align:center;font: 18px 'light','Helvetica Neue',Arial,Helvetica,sans-serif;">Usuarios</div>
 							<ul class="users_list">
             
           					</ul>
 						</div>
 						<div class='rooms'>
+							<div style="background-color: #732222; color: white; width: 100%;text-align:center;font: 18px 'light','Helvetica Neue',Arial,Helvetica,sans-serif;">Salas</div>
 							<ul class="sales_list">
 								<?php
 								$salas = rooms();
@@ -70,6 +74,21 @@ if(!$_SESSION['valid_user']) header("Location: /");
 								<?php } ?>
 							</ul>
 						</div>
+						<div class='nroom'>
+							<div style="background-color: #732222; color: white; width: 100%;text-align:center;font: 18px 'light','Helvetica Neue',Arial,Helvetica,sans-serif;">Sala nueva</div><br>
+							<form style='text-align:center;' action='index.php' method='POST'>
+								<input type='text' style='width: 90%;' class='campo' name='nsala' placeholder='Nombre de la sala'>
+								<input type='text' style='width: 90%;' class='campo' name='ntopic' placeholder='Nombre del topic'>
+								<input type='submit' id='aceptar' class='button' name='ok' value='Aceptar'><br>
+								<?php
+								if ($error==8){
+									echo "<label style='color: #732222;'>Esa sala ya existe</label>";	
+								}else if($msg==4){
+									header('Location: index.php');
+								}
+							?>
+							</form>
+						</div>
 			
 			</div>
 			<div class="buttonBox">
@@ -77,11 +96,14 @@ if(!$_SESSION['valid_user']) header("Location: /");
 				<input type='button' id="ver_usuarios" class="button" value="Usuarios">
 				<input type='button' id="ver_salas" class="button" value="Salas">
 			</div>
-			<div id="messages"></div>
+			<div id="messages">
+				<div id='cabecera_sala' class='cabecera_sala'></div>
+				<hr id='divisor' style='border: 1px solid #732222;'>
+			</div>
 			
 		  </div>
 		<div id="main" class='main'>
-			<div id="passchange" class='passchange'>
+			<div id="passchange" class='passchange' style="display:none">
 				<div style='width: 100%; height: 30px;'>
 					<label class="titulo">Cambio de contraseña</label>
 					<a style='text-decoration:none' href='#'><div id='cerrar' class='cerrar'>X</div>	</a>				
@@ -102,7 +124,7 @@ if(!$_SESSION['valid_user']) header("Location: /");
 			</div>
 
 			<div id="videos">
-				<video id="you" class="flip" autoplay width="100%" height="100%" style="position: relative; float:left;"></video>
+				<video id="you" class="flip" autoplay width="100%" height="100%"></video>
 			</div>
 			
 			<div id="chatbox">

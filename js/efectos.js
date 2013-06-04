@@ -9,6 +9,7 @@ jQuery(document).ready(function(){
 
     $("#ver_usuarios").click(
     	function(){
+    		$(".nroom").hide();
     		$(".rooms").hide();
     		$(".users").show();
     	} 
@@ -16,11 +17,20 @@ jQuery(document).ready(function(){
     
     $("#ver_salas").click(
     	function(){
+    		$(".nroom").hide();
     		$(".users").hide();
     		$(".rooms").show();
     	} 
     )
     
+    $(".nroom").hide();
+    $("#newRoom").click(
+    	function(){
+			$(".nroom").show();
+    		$(".users").hide();
+    		$(".rooms").hide();
+    	} 
+    )
     
     //Control de esconder y mostrar div oculto de informacion del usuario
 	$("#panel").hide();
@@ -64,7 +74,7 @@ jQuery(document).ready(function(){
 		$.ajax({
 			type: "post",
 			dataType: "json",
-			url: "/connect/cambiopass.php",
+			url: "../connect/cambiopass.php",
 			data: datos,
 			success: function(data){
 				// Todo Ok

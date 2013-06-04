@@ -1,63 +1,110 @@
 var videos = [],
     PeerConnection = window.PeerConnection || window.webkitPeerConnection00 || window.webkitRTCPeerConnection || window.mozRTCPeerConnection || window.RTCPeerConnection,
-    menuWidth = 280,
-    headerHeight = 75,
+    menuWidth = 252,
+    headerHeight = 60,
     chatInputHeight = 60,
+    buttonBoxHeight = 42,
     user_id,
     username,
     color;
 
 function UIresize(){
-  // Ancho
-  // var videosWidth = window.innerWidth - menuWidth;
-  // document.getElementById('videos').style.width = videosWidth;
-  // document.getElementById('main').style.width = videosWidth;
-
-  // // Altura
-  // var menuHeight = window.innerHeight - headerHeight - chatInputHeight;
-  // document.getElementById('menu').style.height = menuHeight;  
-  // document.getElementById('main').style.height = window.innerHeight - headerHeight;
+	// Dimensiones Div General
+	var generalWidth = $('.general').css('width');
+		generalWidth = generalWidth.split("px");
+		generalWidth = generalWidth[0],
+		generalHeight = window.innerHeight;
+	
+	// Main
+	var mainWidth = generalWidth - menuWidth,
+	    mainHeight = generalHeight - headerHeight;
+	
+	document.getElementById('main').style.width = mainWidth;
+	document.getElementById('main').style.height = mainHeight;
+	
+	document.getElementById('menu').style.height = mainHeight;
+	
+	// Mensajes
+	var mostrarHeight = $('#mostrar').css('height');
+	mostrarHeight = mostrarHeight.split("px");
+	mostrarHeight = mostrarHeight[0];
+	
+	var messagesHeight = generalHeight - mostrarHeight - buttonBoxHeight - headerHeight;
+	
+	$('#messages').css('height',messagesHeight);
+	
+	// Videos
+	var videosHeight = mainHeight - chatInputHeight,
+	    videosWidth = videosHeight / 0.75;
+	
+	document.getElementById('videos').style.width = videosWidth;
+	document.getElementById('videos').style.height = videosHeight;  
 }
 
 function subdivideVideos() {
-  // var numVideos = videos.length,
-  //     videosHeight = window.innerHeight - headerHeight - chatInputHeight,
-  //     videosWidth = videosHeight / 0.75;
+	// Dimensiones Div General
+	var generalWidth = $('.general').css('width');
+		generalWidth = generalWidth.split("px");
+		generalWidth = generalWidth[0],
+		generalHeight = window.innerHeight;
+	
+  	// Main
+  	var mainWidth = generalWidth - menuWidth,
+      mainHeight = generalHeight - headerHeight;
 
-  // if(videosWidth > (window.innerWidth - menuWidth)){
-  //   videosWidth = window.innerWidth - menuWidth;
-  // }
+  	document.getElementById('main').style.width = mainWidth;
+  	document.getElementById('main').style.height = mainHeight;
+  
+  	document.getElementById('menu').style.height = mainHeight;
 
-  // document.getElementById('videos').style.width = videosWidth;
-  // document.getElementById('videos').style.height = videosHeight;
+	// Mensajes
+	var mostrarHeight = $('#mostrar').css('height');
+	mostrarHeight = mostrarHeight.split("px");
+	mostrarHeight = mostrarHeight[0];
+	
+	var messagesHeight = generalHeight - mostrarHeight - buttonBoxHeight - headerHeight;
+	
+	$('#messages').css('height',messagesHeight);
 
-  // // Local streaming
-  // if(!numVideos){
-  //   document.getElementById('you').style.width = videosWidth;
-  //   document.getElementById('you').style.height = videosHeight;
+  // Videos
+  var numVideos = videos.length,
+      videosHeight = mainHeight - chatInputHeight,
+      videosWidth = videosHeight / 0.75;
 
-  // // Hasta 4 clientes
-  // }else if(numVideos > 0 && numVideos < 4){
-  //   document.getElementById('you').style.width = videosWidth/2;
-  //   document.getElementById('you').style.height = videosHeight/2;
+  if(videosWidth > (generalWidth - menuWidth)){
+    videosWidth = generalWidth - menuWidth;
+  }
 
-  //   for(i in videos){
-  //     var video = videos[i];
-  //     video.style.width = videosWidth/2;
-  //     video.style.height = videosHeight/2;
-  //   }
+  document.getElementById('videos').style.width = videosWidth;
+  document.getElementById('videos').style.height = videosHeight;
 
-  // // Hasta 9 clientes
-  // }else{
-  //   document.getElementById('you').style.width = videosWidth/3;
-  //   document.getElementById('you').style.height = videosHeight/3;
+  // Local streaming
+  if(!numVideos){
+    document.getElementById('you').style.width = videosWidth;
+    document.getElementById('you').style.height = videosHeight;
 
-  //   for(i in videos){
-  //     var video = videos[i];
-  //     video.style.width = videosWidth/3;
-  //     video.style.height = videosHeight/3;
-  //   }
-  // }
+  // Hasta 4 clientes
+  }else if(numVideos > 0 && numVideos < 4){
+    document.getElementById('you').style.width = videosWidth/2;
+    document.getElementById('you').style.height = videosHeight/2;
+
+    for(i in videos){
+      var video = videos[i];
+      video.style.width = videosWidth/2;
+      video.style.height = videosHeight/2;
+    }
+
+  // Hasta 9 clientes
+  }else{
+    document.getElementById('you').style.width = videosWidth/3;
+    document.getElementById('you').style.height = videosHeight/3;
+
+    for(i in videos){
+      var video = videos[i];
+      video.style.width = videosWidth/3;
+      video.style.height = videosHeight/3;
+    }
+  }
 }
 
 function cloneVideo(domId, socketId) {
@@ -105,9 +152,8 @@ function initFullScreen() {
 
 function initNewRoom() {
   var button = document.getElementById("newRoom");
-
   button.addEventListener('click', function(event) {
-
+/*
     var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
     var string_length = 8;
     var randomstring = '';
@@ -115,9 +161,10 @@ function initNewRoom() {
       var rnum = Math.floor(Math.random() * chars.length);
       randomstring += chars.substring(rnum, rnum + 1);
     }
+*/
 
-    window.location.hash = randomstring;
-    location.reload();
+   window.location.hash = randomstring;
+   location.reload();
   })
 }
 
@@ -225,7 +272,7 @@ function init() {
         username = datos.data.nick;
 
         // Conexión por webSocket
-        rtc.connect("ws:192.168.0.198:8080",room);
+        rtc.connect("ws:192.168.12.190:8080",room);
         //rtc.connect("ws:" + window.location.href.substring(window.location.protocol.length).split('#')[0], room);
         
       }else{ window.location = "/"; }
@@ -300,6 +347,15 @@ function init() {
   //initFullScreen();
   initNewRoom();
   initChat();
+
+  var nameroom = window.location.hash.slice(1);
+
+	nameroom=nameroom.replace("_"," ");
+
+  if(nameroom == "") nameroom = "General";
+
+  $('#cabecera_sala').html(nameroom).show();
+  $('#divisor').show();
 
 }
 
